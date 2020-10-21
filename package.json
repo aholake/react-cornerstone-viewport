@@ -1,6 +1,6 @@
 {
-  "name": "react-cornerstone-viewport",
-  "version": "0.2.2",
+  "name": "react-cornerstone-viewport-custom",
+  "version": "0.2.4",
   "description": "Cornerstone medical image viewport component for React",
   "author": "Cornerstone Contributors",
   "license": "MIT",
