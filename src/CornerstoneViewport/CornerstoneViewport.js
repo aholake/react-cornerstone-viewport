@@ -782,8 +782,22 @@ class CornerstoneViewport extends Component {
  * @param {string} activeToolName
  * @returns
  */
+const PASSIVE_TOOLS = ['HeartRuler'];
 function _trySetActiveTool(element, activeToolName) {
-  if (!element || !activeToolName) {
+  if (!element) {
+    return;
+  }
+  if (!activeToolName) {
+    cornerstoneTools.setToolActive('Wwwc', {
+      mouseButtonMask: 1,
+    });
+    cornerstoneTools.setToolActive('Zoom', {
+      mouseButtonMask: 2,
+    });
+    cornerstoneTools.setToolActive('Pan', {
+      mouseButtonMask: 4,
+    });
+    cornerstoneTools.setToolDisabledForElement(element, 'HeartRuler');
     return;
   }
 
@@ -800,16 +814,18 @@ function _trySetActiveTool(element, activeToolName) {
     );
   }
 
-  if (activeToolName === 'HeartRuler') {
+  if (PASSIVE_TOOLS.includes(activeToolName)) {
     cornerstoneTools.setToolPassiveForElement(element, activeToolName, {
       mouseButtonMask: 1,
-      preventHandleOutsideImage: false,
-      deleteIfHandleOutsideImage: false,
     });
   } else {
     cornerstoneTools.setToolActiveForElement(element, activeToolName, {
       mouseButtonMask: 1,
     });
+  }
+
+  if (activeToolName === 'HeartRuler') {
+    cornerstoneTools.setToolDisabled('Zoom');
   }
 }
 
